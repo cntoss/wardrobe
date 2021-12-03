@@ -1,0 +1,77 @@
+name: wardrobe
+description: A new Flutter project.
+
+publish_to: 'none' # Remove this line if you wish to publish to pub.dev
+
+version: 1.0.0+1
+
+environment:
+  sdk: ">=2.12.0 <3.0.0"
+
+dependencies:
+  flutter:
+    sdk: flutter
+
+  cached_network_image:
+  carousel_slider:
+  collection:
+  cupertino_icons:
+  dio:
+  file_picker:  
+  firebase_auth:
+  firebase_core:
+  flutter_facebook_auth:
+  flutter_html:
+  flutter_native_image:
+  flutter_rating_bar:
+  flutter_secure_storage:
+  flutter_snake_navigationbar:
+  flutter_staggered_animations:
+  fluttertoast:
+  font_awesome_flutter:
+  get_it:
+  google_fonts:
+  google_sign_in:
+  hive:
+  hive_flutter:
+  image_picker:
+  intl:
+  introduction_screen:
+  # play store app store   
+  # launch_review:
+  location:
+  # mapbox_gl:
+  onesignal_flutter:
+  package_info:
+  path_provider:
+  percent_indicator:
+  permission_handler:
+  phone_number:
+  photo_view:
+  pin_code_fields:
+  rxdart:
+  sign_in_with_apple:  
+  shimmer:
+    # deeplink
+  uni_links:
+  url_launcher:
+
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+
+  flutter_lints: ^1.0.0
+
+flutter:
+
+  uses-material-design: true
+  
+  assets:
+    - assets/envConfig/appConfig.json
+    - assets/images/
+    - assets/icons/global/
+    - assets/icons/navBar/
+    - assets/icons/profile/
+    - assets/icons/menu/
+    - assets/icons/product and store/
