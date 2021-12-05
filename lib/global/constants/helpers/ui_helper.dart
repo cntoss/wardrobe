@@ -91,22 +91,25 @@ class UiHelper {
         apiCalls();
         return 0;
       }
-    } else
+    } else {
       return null;
+    }
   }
 
   String ampm(String? t) {
     if (t != null) {
       List times = t.split(':');
       String x = times[0];
-      if (int.parse(x) <= 11)
+      if (int.parse(x) <= 11) {
         return '$x:${times[1]} AM';
-      else if (x == '12')
+      } else if (x == '12') {
         return '12:${times[1]} PM';
-      else
+      } else {
         return '${(int.parse(x) - 12).toString()}:${times[1]} PM';
-    } else
+      }
+    } else {
       return '';
+    }
   }
 
   double priceToDouble(price) {
@@ -147,8 +150,8 @@ class UiHelper {
         title: title == null
             ? WardrobeLogo(
                 padding: 0,
-                height: _sizeConfig.blockSizeH * 18,
-                width: _sizeConfig.blockSizeH * 18,
+                height: _sizeConfig.blockSizeH * 5,
+                width: _sizeConfig.blockSizeH * 5,
               )
             : Text(title, style: Theme.of(context).textTheme.headline1),
       ),

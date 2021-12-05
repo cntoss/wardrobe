@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_snake_navigationbar/flutter_snake_navigationbar.dart';
 import 'package:uni_links/uni_links.dart';
+import 'package:wardrobe/configurations/theme/app_colors.dart';
 import 'package:wardrobe/features/home/homeindex/ui/screen/home_screen.dart';
+import 'package:wardrobe/features/home/notification/ui/page/notification_screen.dart';
+import 'package:wardrobe/features/home/navigation/screens/widget/fab_button.dart';
 
 import '../../../../configurations/serviceLocator/locator.dart';
 import '../../../../global/deeplink/deeplink_manager.dart';
@@ -25,6 +28,7 @@ class _NavigationScreenState extends State<NavigationScreen> {
   final _home = const HomeScreen();
   final _category = CategoryScreen();
   final _profile = const ProfileScreen();
+  final _notification = const NotificationScreen();
 
   final SizeConfig _sizeConfig = locator<SizeConfig>();
   final UiHelper _uiHelper = locator<UiHelper>();
@@ -36,6 +40,7 @@ class _NavigationScreenState extends State<NavigationScreen> {
   @override
   void initState() {
     super.initState();
+    _screen = widget.screen ?? 1;
     _pageController = PageController(initialPage: _screen);
     initUniLinks(context);
   }
@@ -67,35 +72,55 @@ class _NavigationScreenState extends State<NavigationScreen> {
           /* showSearch(
               context: context, delegate: AppSearchDelegate(searchFrom: "")); */
         },
-        appBar: _uiHelper.appBar(context, actions: [IconFromAsset.search]),
+        appBar: _uiHelper.appBar(context),
       ),
       body: _buildPageView,
-      bottomNavigationBar: _buildBtmNavBar(context),
+      floatingActionButton: FloatingActionButton(
+        backgroundColor: Theme.of(context).primaryColor,
+        onPressed: () {},
+        tooltip: 'Increment',
+        child: Column(
+          children: [
+            Transform.rotate(
+              angle: -2.2,
+              child: Column(
+                children: [
+                  Icon(
+                    Icons.label_outlined,
+                    size: _sizeConfig.safeBlockW * 8,
+                    color: Colors.white,
+                  )
+                ],
+              ),
+            ),
+            const Text('Sell')
+          ],
+        ),
+        elevation: 4.0,
+      ),
+      floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
+      bottomNavigationBar: BottomAppBar(
+          notchMargin: 5.0,
+          elevation: 4,
+          shape: const CircularNotchedRectangle(),
+          child: _buildBtmNavBar(context)),
     );
   }
 
-  SnakeNavigationBar _buildBtmNavBar(BuildContext context) {
-    return SnakeNavigationBar.color(
-      behaviour: SnakeBarBehaviour.floating,
-      snakeShape: SnakeShape.indicator,
-      padding: const EdgeInsets.all(0),
-      snakeViewColor: Theme.of(context).primaryColor,
-      selectedItemColor: Theme.of(context).primaryColor,
-      unselectedItemColor: Theme.of(context).accentColor,
-      showUnselectedLabels: false,
-      showSelectedLabels: false,
-      currentIndex: _screen,
-      onTap: _onItemTapped,
+  _buildBtmNavBar(BuildContext context) {
+    return FABBottomAppBar(
+      centerItemText: 'A',
+      notchedShape: const CircularNotchedRectangle(),
+      onTabSelected: _onItemTapped,
+      selectedColor: Theme.of(context).primaryColor,
+      color: Theme.of(context).accentColor,
+      backgroundColor: Colors.white,
       items: [
-        BottomNavigationBarItem(
-          icon: IconFromAsset.home,
-        ),
-        BottomNavigationBarItem(
-          icon: IconFromAsset.category(3),
-        ),
-        BottomNavigationBarItem(
-          icon: IconFromAsset.user,
-        ),
+        FABBottomAppBarItem(iconData: Icons.home_outlined, text: 'Home'),
+        FABBottomAppBarItem(iconData: Icons.apps_outlined, text: 'Category'),
+        FABBottomAppBarItem(
+            iconData: Icons.notification_add_rounded, text: 'Notification'),
+        FABBottomAppBarItem(iconData: Icons.person_outline, text: 'Profile'),
       ],
     );
   }
@@ -112,6 +137,7 @@ class _NavigationScreenState extends State<NavigationScreen> {
       children: [
         _home,
         _category,
+        _notification,
         _profile,
       ],
     );

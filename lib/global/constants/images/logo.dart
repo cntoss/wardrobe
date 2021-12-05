@@ -15,12 +15,12 @@ class WardrobeLogo extends StatelessWidget {
       tag: "WardrobeLogo",
       child: Padding(
         padding: EdgeInsets.all(padding),
-         child: const FlutterLogo()
-       /*  child: Image.asset(
+        // child: const FlutterLogo()
+        child: Image.asset(
           'assets/images/logo.png',
           height: height,
           width: width,
-        ), */
+        ),
       ),
     );
   }
